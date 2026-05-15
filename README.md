@@ -13,3 +13,4 @@ Now every time you check someone's profile from cs2 match, you will see stats fr
 
 Preview: https://i.postimg.cc/90mbPNyF/Screen-Shot-Tool-20260515161018.png
 
+Contact me via steam if you experience any bugs.

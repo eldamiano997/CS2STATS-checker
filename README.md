@@ -9,3 +9,7 @@ Since Steam runs on Chromium, you can install almost any Chrome Web Store extens
 4. Extension will open in new window, go here - chrome://extensions/ and delete that 'useless' extension, top right turn on developer mode, Load unpacked and choose folder [CS2STATSEXT] and turn that on.
 
 Now every time you check someone's profile from cs2 match, you will see stats from faceit and leetify. On the bottom there's link. Press to check full csst.at stats!
+
+
+Preview: https://i.postimg.cc/90mbPNyF/Screen-Shot-Tool-20260515161018.png
+

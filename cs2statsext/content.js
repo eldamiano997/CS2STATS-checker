@@ -68,11 +68,18 @@
     const wrapper = document.createElement("div");
     wrapper.id = "stats-pro-v2";
     Object.assign(wrapper.style, {
-      marginTop: "10px", padding: "15px", backgroundColor: "rgba(23, 26, 33, 0.95)",
-      borderRadius: "4px", color: "#acb2b8", fontSize: "12px", borderLeft: "3px solid #32d35a"
+      marginTop: "10px",
+      padding: "16px",
+      backgroundColor: "rgba(23, 26, 33, 0.98)",
+      borderRadius: "6px",
+      color: "#acb2b8",
+      fontSize: "13px",
+      border: "1px solid rgba(50, 211, 90, 0.3)",
+      boxShadow: "0 4px 15px rgba(0,0,0,0.5)",
+      fontFamily: "'Motiva Sans', Sans-serif"
     });
     
-    wrapper.innerHTML = `<div style="color:#5cb85c">Loading Stats...</div>`;
+    wrapper.innerHTML = `<div style="color:#32d35a; font-weight:bold; text-align:center;">SCANNING...</div>`;
     target.prepend(wrapper);
 
     const fData = await fetchFaceit(steam64);
@@ -83,35 +90,37 @@
       const s = fData.stats;
       const last = s[0] ? (s[0].stats["Match Finished At"] || s[0].updated_at) : null;
       const kd = (s.reduce((a, b) => a + parseFloat(b.stats["K/D Ratio"]), 0) / s.length).toFixed(2);
+      const eloCS2 = fData.info.games?.cs2?.faceit_elo || "N/A";
+      const eloCSGO = fData.info.games?.csgo?.faceit_elo || "N/A";
+
       content += `
-        <div style="color:#ff6c20; font-weight:bold; margin-bottom:5px;">FACEIT</div>
-        <div style="display:flex; justify-content:space-between;">ELO: <b style="color:white;">${fData.info.games.cs2.faceit_elo}</b></div>
-        <div style="display:flex; justify-content:space-between;">Avg K/D: <b>${kd}</b></div>
-        <div style="display:flex; justify-content:space-between;">Last: <b>${formatLastPlayed(last)}</b></div>
+        <div style="color:#ff6c20; font-weight:bold; font-size:11px; text-transform:uppercase; letter-spacing:1px; border-bottom:1px solid rgba(255,108,32,0.2); padding-bottom:4px; margin-bottom:8px;">Faceit Network</div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>CS2 ELO</span><b style="color:#fff;">${eloCS2}</b></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>CS:GO ELO</span><b style="color:#888;">${eloCSGO}</b></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Avg K/D (30m)</span><b style="color:#fff;">${kd}</b></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Last Match</span><b style="color:#fff; font-size:11px;">${formatLastPlayed(last)}</b></div>
       `;
     }
 
     if (lData) {
       content += `
-        <div style="height:1px; background:#394a5a; margin:10px 0;"></div>
-        <div style="color:#66c0f4; font-weight:bold; margin-bottom:5px;">LEETIFY</div>
-        <div style="display:flex; justify-content:space-between;">Rating: <b>${lData.rating?.toFixed(2) || "N/A"}</b></div>
-        <div style="display:flex; justify-content:space-between;">Aim: <b>${Math.round(lData.aim) || "N/A"}</b></div>
-        <div style="display:flex; justify-content:space-between;">Reaction: <b>${Math.round(lData.reaction)}ms</b></div>
-        <div style="display:flex; justify-content:space-between;">Matches: <b>${lData.total}</b></div>
+        <div style="color:#66c0f4; font-weight:bold; font-size:11px; text-transform:uppercase; letter-spacing:1px; border-bottom:1px solid rgba(102,192,244,0.2); padding-bottom:4px; margin:14px 0 8px 0;">Leetify Intel</div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Rating</span><b style="color:#fff;">${lData.rating?.toFixed(2) || "N/A"}</b></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Aim Power</span><b style="color:#fff;">${Math.round(lData.aim) || "N/A"}</b></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Reaction</span><b style="color:#fff;">${Math.round(lData.reaction)}ms</b></div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:4px;"><span>Matches</span><b style="color:#fff;">${lData.total}</b></div>
       `;
     }
 
     content += `
-      <div style="margin-top:12px;">
-        <a href="https://csst.at/profile/${steam64}" target="_blank" style="display:block; background:#32d35a; color:black; text-align:center; padding:6px; text-decoration:none; border-radius:2px; font-weight:bold;">OPEN CSST.AT</a>
-      </div>
+      <a href="https://csst.at/profile/${steam64}" target="_blank" 
+         style="display:block; margin-top:15px; background:linear-gradient(90deg, #32d35a, #28a745); color:#000; text-align:center; padding:8px; text-decoration:none; border-radius:3px; font-weight:bold; font-size:11px; text-transform:uppercase;">
+         FULL CSST.AT PROFILE
+      </a>
     `;
 
     wrapper.innerHTML = content;
   }
 
-  // Odpalamy z opóźnieniem, żeby Steam się "uspokoił"
   setTimeout(inject, 1500);
-
 })();

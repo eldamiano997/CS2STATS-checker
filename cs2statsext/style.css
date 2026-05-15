@@ -1,0 +1,14 @@
+.csst-stats-panel {
+    background: #171a21;
+    border: 1px solid #2a475e;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: #acb2b8;
+    font-family: Arial, sans-serif;
+}
+.csst-header { color: #66c0f4; font-weight: bold; margin-bottom: 10px; border-bottom: 1px solid #2a475e; }
+.csst-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.csst-link { display: block; text-align: center; background: #2a475e; color: white !important; padding: 5px; margin-top: 10px; text-decoration: none; font-size: 11px; }
+.loading-pulse { animation: pulse 1.5s infinite; color: #4eaddf; font-size: 11px; }
+@keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
